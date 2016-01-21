@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-9 col9">
+    <span>Work Timer</span>
+    <div>{{promdrTimerCtrl.workingTimer | date:'mm:ss'}}</div>
+    <span>Rest Timer</span>
+    <div>{{promdrTimerCtrl.restTimer | date: 'mm:ss'}}</div>
+  </div>
+  <div class="col-3 col3" ng-app="">
+    <button class="btn btn-success" ng-click="promdrTimerCtrl.startWorkingTimer()">Start</button>
+    <button class="btn btn-success" ng-click="promdrTimerCtrl.pauseWorkingTimer()">Pause</button>
+    <button class="btn btn-warning" ng-click="promdrTimerCtrl.resetWorkingTimer()">Stop</button>
+  </div>
+</div>
