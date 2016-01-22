@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="taskContainer">
+    <div ng-repeat="task in promdrTaskListCtrl.taskList">
+      <div>
+        <span>name: </span><span>{{task.name}}</span>
+      </div>
+      <div>
+        <span>status: </span><span>{{task.status}}</span>
+      </div>
+    </div>
+  </div>
+
+  <button ng-click="promdrTaskListCtrl.addTask()">add new task</button>
+
+</body>
+</html>

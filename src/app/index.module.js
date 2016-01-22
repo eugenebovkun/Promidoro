@@ -5,6 +5,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import PromdrTimerController from './promdr-timer/promdr-timer-controller';
 import { MainController } from './main/main.controller';
+import { PromdrTaskListController } from './promdr-task-list/promdr-task-list-controller';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
@@ -20,5 +21,6 @@ angular.module('proMidoro', ['ngAnimate', 'ngResource', 'ui.router', 'ngMaterial
   .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
   .controller('promdrTimerController', PromdrTimerController)
+  .controller('promdrTaskListController', PromdrTaskListController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective);
