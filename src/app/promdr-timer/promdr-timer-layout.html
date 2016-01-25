@@ -1,13 +1,18 @@
+<div ng-if="promdrTimerCtrl.currentTask">
+  <span>current task: {{promdrTimerCtrl.currentTask.name}}</span>
+</div>
 <div class="row">
-  <div class="col-9 col9">
+  <div class="col-9 col3">
     <span>Work Timer</span>
     <div>{{promdrTimerCtrl.workingTimer | date:'mm:ss'}}</div>
     <span>Rest Timer</span>
     <div>{{promdrTimerCtrl.restTimer | date: 'mm:ss'}}</div>
   </div>
-  <div class="col-3 col3" ng-app="">
-    <button class="btn btn-success" ng-click="promdrTimerCtrl.startWorkingTimer()">Start</button>
-    <button class="btn btn-success" ng-click="promdrTimerCtrl.pauseWorkingTimer()">Pause</button>
-    <button class="btn btn-warning" ng-click="promdrTimerCtrl.resetWorkingTimer()">Stop</button>
+  <div class="col-3 col3">
+    <button class="ui-button" ng-click="promdrTimerCtrl.startWorkingTimer()">Start</button>
+    <button class="ui-button" ng-click="promdrTimerCtrl.pauseWorkingTimer()">Pause</button>
+    <button class="ui-button delete-button" ng-click="promdrTimerCtrl.resetWorkingTimer()">Stop</button>
   </div>
 </div>
+<hr>
+<a ng-href="#/tasks">Go To Tasks</a>

@@ -8,13 +8,19 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controllerAs: 'main'
     })
     .state('timer', {
-      url: '/',
+      url: '/timer',
+      templateUrl: 'app/promdr-timer/promdr-timer-layout.html',
+      controller: 'promdrTimerController',
+      controllerAs: 'promdrTimerCtrl'
+    })
+    .state('taskTimer', {
+      url: '/timer/task/:index',
       templateUrl: 'app/promdr-timer/promdr-timer-layout.html',
       controller: 'promdrTimerController',
       controllerAs: 'promdrTimerCtrl'
     })
     .state('tasks', {
-      url: '/tasks',
+      url: '/',
       templateUrl: 'app/promdr-task-list/promdr-task-list-layout.html',
       controller: 'promdrTaskListController',
       controllerAs: 'promdrTaskListCtrl'

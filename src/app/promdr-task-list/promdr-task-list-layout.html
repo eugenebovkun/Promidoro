@@ -5,18 +5,27 @@
     <title>Title</title>
 </head>
 <body>
+
+<div class="new-task-container">
+  <input type="text" ng-model="promdrTaskListCtrl.newTask.name"/>
+  <button ng-click="promdrTaskListCtrl.addTask()">add new task</button>
+</div>
+<hr>
   <div id="taskContainer">
-    <div ng-repeat="task in promdrTaskListCtrl.taskList">
+    <div class="task-item" ng-repeat="task in promdrTaskListCtrl.taskList">
+      <a ng-href='#/timer/task/{{$index}}'> Let`s do this task </a>
       <div>
         <span>name: </span><span>{{task.name}}</span>
       </div>
       <div>
         <span>status: </span><span>{{task.status}}</span>
       </div>
+      <div>
+        <span>progress: </span><span>{{task.progress + '%'}}</span>
+      </div>
     </div>
   </div>
 
-  <button ng-click="promdrTaskListCtrl.addTask()">add new task</button>
 
 </body>
 </html>

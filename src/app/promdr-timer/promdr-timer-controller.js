@@ -1,6 +1,6 @@
-PromdrTimerController.$inject = ['$interval', '$log', '$filter'];
+PromdrTimerController.$inject = ['$interval', '$log', '$filter', '$stateParams', 'promdrTasks'];
 
-export default function PromdrTimerController($interval, $log, $filter) {
+export default function PromdrTimerController($interval, $log, $filter, $stateParams, promdrTasks, taskNumber, taskNumber2) {
   let vm = this;
 
   const WORKING_PERIOD = 25*60*1000;
@@ -8,6 +8,8 @@ export default function PromdrTimerController($interval, $log, $filter) {
 
   let workingTimer;
   let restTimer;
+  vm.currentTask = promdrTasks.list[$stateParams.index];
+
 
   Object.assign(vm, {
     workingTimer: 0,

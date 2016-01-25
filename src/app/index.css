@@ -82,3 +82,11 @@ section.jumbotron h1 {
   float: right;
   width: 100px;
 }
+
+.task-item {
+  border: 1px solid grey;
+  background-color: #cccc99;
+  margin: 2px;
+  border-radius: 5px;
+  text-align: center;
+}

@@ -1,17 +1,19 @@
 export class PromdrTaks {
-  constructor (taskName) {
+  constructor (md5) {
     const taskDone = 100;
-    const taskStatuses = {
+
+    this.taskStatuses = {
       new: 'new',
       inProgress: 'in Progress',
       done: 'done'
     };
 
-    this.taskName = taskName;
+    this.taskName = 'new Task';
     this.partOfDone = 0;
     this.status = 'new';
 
   }
+
 
   renameTask(newName) {
     this.taskName = newName;
@@ -19,12 +21,12 @@ export class PromdrTaks {
 
   finishTask() {
     this.partOfDone = taskDone;
-    this.status = taskStatuses.done;
+    this.status = this.taskStatuses.done;
     return this;
   }
 
   startTask() {
-    this.status = taskStatuses.inProgress;
+    this.status = this.taskStatuses.inProgress;
     return this;
   }
 

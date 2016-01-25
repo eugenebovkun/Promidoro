@@ -1,19 +1,15 @@
 import { PromdrTaks } from './promdr-task'
 
 export class PromdrTaskListController {
-  constructor () {
+  constructor (promdrTasks) {
     'ngInject';
 
-    this.taskList = [{
-      name: 'task X',
-      status: 'new'
-    }];
+    this.taskList = promdrTasks.list;
+
+    this.newTask = new PromdrTaks();
   }
     addTask() {
-      const newTask = {
-        name: 'task X',
-        status: 'new'
-      };
-        this.taskList.push(newTask);
+        this.taskList.push(this.newTask);
+        this.newTask = new PromdrTaks();
     }
 }
