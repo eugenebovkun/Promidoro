@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 
-<div class="new-task-container">
-  <input type="text" ng-model="promdrTaskListCtrl.newTask.name"/>
-  <button ng-click="promdrTaskListCtrl.addTask()">add new task</button>
-</div>
-<hr>
-  <div id="taskContainer">
-    <div class="task-item" ng-repeat="task in promdrTaskListCtrl.taskList">
-      <a ng-href='#/timer/task/{{$index}}'> Let`s do this task </a>
-      <div>
-        <span>name: </span><span>{{task.name}}</span>
+<div layout="row">
+  <div flex="38" class="md-whiteframe-4dp">
+    <md-input-container class="new-task-container">
+      <input type="text" ng-model="promdrTaskListCtrl.newTask.name"/>
+      <md-button ng-click="promdrTaskListCtrl.addTask()">add new task</md-button>
+    </md-input-container>
+    <md-list>
+      <md-list-item ng-repeat="task in promdrTaskListCtrl.taskList" layout="column" style="background-color:#FFD54F"
+                    ng-click="promdrTaskListCtrl.selectTask(task)">
+        <div layout="column">
+          <span>name: {{task.name}} </span>
+          <span>status: {{task.status}} </span>
+          <md-progress-linear md-mode="determinate" ng-value="0"></md-progress-linear>
+
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div flex="60">
+    <div ng-if="promdrTaskListCtrl.selectedTask">
+      <span>current task: {{promdrTaskListCtrl.selectedTask.name}}</span>
+    </div>
+    <div ng-controller="promdrTimerController as promdrTimerCtrl">
+      <div layout="column" layout-align="center center">
+
+        <span>Work Timer</span>
+        <div>{{promdrTimerCtrl.workingTimer | date:'mm:ss'}}</div>
+        <span>Rest Timer</span>
+        <div>{{promdrTimerCtrl.restTimer | date: 'mm:ss'}}</div>
+
       </div>
-      <div>
-        <span>status: </span><span>{{task.status}}</span>
-      </div>
-      <div>
-        <span>progress: </span><span>{{task.progress + '%'}}</span>
-      </div>
+      <md-input-container layout="row" layout-align="space-around center">
+        <md-button class="" ng-click="promdrTimerCtrl.startWorkingTimer()">Start</md-button>
+        <md-button class="" ng-click="promdrTimerCtrl.pauseWorkingTimer()">Pause</md-button>
+        <md-button class="" ng-click="promdrTimerCtrl.resetWorkingTimer()">Stop</md-button>
+      </md-input-container>
     </div>
   </div>
-
-
+</div>
+</div>
 </body>
 </html>

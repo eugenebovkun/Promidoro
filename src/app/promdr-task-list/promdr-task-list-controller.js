@@ -4,6 +4,7 @@ export class PromdrTaskListController {
   constructor (promdrTasks) {
     'ngInject';
 
+    this.selectedTask = null;
     this.taskList = promdrTasks.list;
 
     this.newTask = new PromdrTaks();
@@ -12,4 +13,8 @@ export class PromdrTaskListController {
         this.taskList.push(this.newTask);
         this.newTask = new PromdrTaks();
     }
+
+  selectTask(task) {
+      this.selectedTask = task;
+  }
 }
