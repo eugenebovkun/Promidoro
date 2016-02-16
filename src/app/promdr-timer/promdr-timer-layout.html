@@ -4,13 +4,13 @@
 <div class="row">
   <div class="col-9 col3">
     <span>Work Timer</span>
-    <div>{{promdrTimerCtrl.workingTimer | date:'mm:ss'}}</div>
+    <div>{{promdrTimerCtrl.workingTimer.count | date:'mm:ss'}}</div>
     <span>Rest Timer</span>
-    <div>{{promdrTimerCtrl.restTimer | date: 'mm:ss'}}</div>
+    <div>{{promdrTimerCtrl.restTimer.count | date: 'mm:ss'}}</div>
   </div>
   <div class="col-3 col3">
     <button class="ui-button" ng-click="promdrTimerCtrl.startWorkingTimer()">Start</button>
-    <button class="ui-button" ng-click="promdrTimerCtrl.pauseWorkingTimer()">Pause</button>
+    <button class="ui-button" ng-click="promdrTimerCtrl.stopActiveTimer()">Pause</button>
     <button class="ui-button delete-button" ng-click="promdrTimerCtrl.resetWorkingTimer()">Stop</button>
   </div>
 </div>

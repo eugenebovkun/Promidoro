@@ -1,65 +1,114 @@
-PromdrTimerController.$inject = ['$interval', '$log', '$filter', '$stateParams', 'promdrTasks'];
+PromdrTimerController.$inject = ['$interval', '$log', '$filter'];
 
-export default function PromdrTimerController($interval, $log, $filter, $stateParams, promdrTasks, taskNumber, taskNumber2) {
+export default function PromdrTimerController($interval) {
   let vm = this;
 
-  const WORKING_PERIOD = 25*60*1000;
-  const REST_PERIOD = 5*60*1000;
+  //const WORKING_PERIOD = 25 * 60 * 1000;
+  //const REST_PERIOD = 5 * 60 * 1000;
+  const WORKING_PERIOD = 5 * 1000;
+  const REST_PERIOD = 5 * 1000;
+  let deadline;
 
   let workingTimer;
   let restTimer;
-  vm.currentTask = promdrTasks.list[$stateParams.index];
-
 
   Object.assign(vm, {
-    workingTimer: 0,
-    restTimer: 0,
+    activeTimer: null,
+    workingTimer: {
+      counter: null,
+      count: 0
+    },
+    restTimer: {
+      counter: null,
+      count: 0
+    },
 
+    stopActiveTimer,
     startWorkingTimer,
     resetWorkingTimer,
-    pauseWorkingTimer,
-    startRestTimer,
-    resetRestTimer
+    initTimers
   });
 
   initTimers();
 
-
   function initTimers() {
-    "use strict";
-    vm.workingTimer = WORKING_PERIOD;
-    vm.restTimer = REST_PERIOD;
+    vm.workingTimer = {
+      counter: null,
+      count: WORKING_PERIOD
+    };
+    vm.restTimer = {
+      counter: null,
+      count: REST_PERIOD
+    };
   }
 
   function startWorkingTimer() {
-      workingTimer = $interval(countDownWorkingTimer, 1000, vm.workingTimer/1000);
+    if (!vm.workingTimer.counter) {
+      vm.workingTimer.count = WORKING_PERIOD;
+      vm.activeTimer = vm.workingTimer;
+      startActiveTimer();
+    }
   }
 
   function startRestTimer() {
-    restTimer = $interval(countDownWorkingTimer, 1000, vm.restTimer/1000);
-  }
-
-  function resetWorkingTimer () {
-      $interval.cancel(workingTimer);
-      initTimers();
-  }
-
-  function resetRestTimer () {
-      $interval.cancel(restTimer);
-      initTimers();
-  }
-
-  function pauseWorkingTimer() {
-    $interval.cancel(workingTimer);
-  }
-
-
-  function countDownWorkingTimer() {
-    vm.workingTimer -= 1000;
-    if (vm.workingTimer % 10*1000 === 0) {
-      $log.info('working timer now', $filter('date')(vm.workingTimer, 'mm:ss:sss'))
+    if (!vm.restTimer.counter) {
+      vm.restTimer.count = REST_PERIOD;
+      vm.activeTimer = vm.restTimer;
+      startActiveTimer();
     }
   }
+
+  function startActiveTimer() {
+      initTimer(vm.activeTimer.count);
+
+      vm.activeTimer.counter = $interval(() => {updateTimer(vm.activeTimer)}, 1000);
+  }
+
+  function resetWorkingTimer() {
+    $interval.cancel(vm.workingTimer.counter);
+    initTimers();
+  }
+
+  function resetRestTimer() {
+    $interval.cancel(vm.restTimer.counter);
+    initTimers();
+  }
+
+  function stopActiveTimer() {
+    $interval.cancel(vm.activeTimer.counter);
+  }
+
+
+  function initTimer(interval) {
+    const currentTime = Date.parse(new Date());
+    return deadline = new Date(currentTime + interval);
+  }
+
+  function getTimeRemaining(endtime) {
+    return Date.parse(endtime) - Date.parse(new Date());
+  }
+
+  function updateTimer(timer) {
+     if (getTimeRemaining(deadline) <= 0) {
+       if (timer === vm.workingTimer){
+         resetWorkingTimer();
+         alert('Time to Rest!');
+         startRestTimer();
+       } else if (timer === vm.restTimer){
+         resetRestTimer();
+         alert('Time to Work!');
+         startWorkingTimer();
+       }
+     } else {
+       timer.count = getTimeRemaining(deadline);
+     }
+  }
+
+  //function toggleTimer() {
+  //  vm.activeTimer = (angular.equals(vm.activeTimer, vm.workingTimer)) ? vm.restTimer : vm.workingTimer;
+  //  initTimers();
+  //  startActiveTimer();
+  //}
 
   return vm;
 }

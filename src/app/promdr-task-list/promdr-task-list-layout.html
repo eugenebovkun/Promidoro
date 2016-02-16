@@ -32,9 +32,9 @@
       <div layout="column" layout-align="center center">
 
         <span>Work Timer</span>
-        <div>{{promdrTimerCtrl.workingTimer | date:'mm:ss'}}</div>
+        <div>{{promdrTimerCtrl.workingTimer.count | date:'mm:ss'}}</div>
         <span>Rest Timer</span>
-        <div>{{promdrTimerCtrl.restTimer | date: 'mm:ss'}}</div>
+        <div>{{promdrTimerCtrl.restTimer.count | date: 'mm:ss'}}</div>
 
       </div>
       <md-input-container layout="row" layout-align="space-around center">
