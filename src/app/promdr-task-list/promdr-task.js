@@ -1,6 +1,6 @@
+const taskDone = 100;
 export class PromdrTaks {
-  constructor (md5) {
-    const taskDone = 100;
+  constructor () {
 
     this.taskStatuses = {
       new: 'new',
@@ -11,15 +11,14 @@ export class PromdrTaks {
     this.taskName = 'new Task';
     this.partOfDone = 0;
     this.status = 'new';
-
   }
 
-
-  renameTask(newName) {
-    this.taskName = newName;
+  restart() {
+    this.partOfDone = 0;
+    this.status = this.taskStatuses.new;
   }
 
-  finishTask() {
+  done() {
     this.partOfDone = taskDone;
     this.status = this.taskStatuses.done;
     return this;

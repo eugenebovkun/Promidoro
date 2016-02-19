@@ -9,17 +9,35 @@
 <div layout="row">
   <div flex="38" class="md-whiteframe-4dp">
     <md-input-container class="new-task-container">
-      <input type="text" ng-model="promdrTaskListCtrl.newTask.name"/>
-      <md-button ng-click="promdrTaskListCtrl.addTask()">add new task</md-button>
+      <input type="text" placeholder='new task'
+          ng-model="promdrTaskListCtrl.newTask.name"/>
+      <md-button ng-click="promdrTaskListCtrl.addTask()" ng-dissabled="promdrTaskListCtrl.newTask.name === ''">add</md-button>
     </md-input-container>
     <md-list>
-      <md-list-item ng-repeat="task in promdrTaskListCtrl.taskList" layout="column" style="background-color:#FFD54F"
-                    ng-click="promdrTaskListCtrl.selectTask(task)">
+      <md-list-item ng-repeat="task in promdrTaskListCtrl.taskList | filter: {status: '!done'}" layout="column" style="background-color:#FFD54F">
         <div layout="column">
-          <span>name: {{task.name}} </span>
+          <laben>Task:</laben>
+          <input ng-model="task.name"/>
           <span>status: {{task.status}} </span>
-          <md-progress-linear md-mode="determinate" ng-value="0"></md-progress-linear>
-
+          <md-progress-linear md-mode="determinate" ng-value="task.partOfDone"></md-progress-linear>
+          <md-input-container layout="row" layout-align="space-around center">
+            <md-button ng-click="task.done()">Done</md-button>
+            <md-button class="background-color:green" ng-click="promdrTaskListCtrl.selectTask(task)">Run</md-button>
+            <md-button class="button-working" ng-click="promdrTaskListCtrl.deleteTaskFromList(task)">Delete</md-button>
+          </md-input-container>
+        </div>
+      </md-list-item>
+      Done:
+      <md-list-item ng-repeat="task in promdrTaskListCtrl.taskList | filter: {status: 'done'}" layout="column" style="background-color:#00ff09">
+        <div layout="column">
+          <laben>Task:</laben>
+          <input ng-model="task.name"/>
+          <span>status: {{task.status}} </span>
+          <md-progress-linear md-mode="determinate" ng-value="task.partOfDone"></md-progress-linear>
+          <md-input-container layout="row" layout-align="space-around center">
+            <md-button class="background-color:green" ng-click="task.restart()">Restart</md-button>
+            <md-button class="button-working" ng-click="promdrTaskListCtrl.deleteTaskFromList(task)">Delete</md-button>
+          </md-input-container>
         </div>
       </md-list-item>
     </md-list>
